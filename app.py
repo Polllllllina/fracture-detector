@@ -3,6 +3,7 @@ from ultralytics import YOLO
 from PIL import Image
 import numpy as np
 import cv2
+import os
 
 st.set_page_config(page_title="Детекция переломов", layout="wide")
 st.title("🦴 Детекция переломов на рентгеновских снимках")
@@ -14,18 +15,20 @@ model_choice = st.radio(
     horizontal=True
 )
 
-# Загружаем модель (пока заглушка — одна и та же)
+# Загружаем модель из текущей папки
 @st.cache_resource
 def load_model(path):
     return YOLO(path)
 
+# Путь к файлу модели в той же папке, что и app.py
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "best.pt")
+
 if "Быстрая" in model_choice:
-    model = load_model("/content/runs/detect/fracture_fast/weights/best.pt")
+    model = load_model(MODEL_PATH)
     st.info("⚡ Быстрая модель — результат за секунды")
 else:
-    # Пока используем ту же модель, потом заменим
-    model = load_model("/content/runs/detect/fracture_fast/weights/best.pt")
-    st.warning("🎯 Точная модель — подождёт загрузку настоящих весов")
+    model = load_model(MODEL_PATH)
+    st.warning("🎯 Точная модель — скоро заменим на настоящую")
 
 # Загрузка изображения
 uploaded_file = st.file_uploader("Загрузите рентгеновский снимок", type=["jpg", "jpeg", "png"])
