@@ -1,0 +1,8 @@
+ultralytics
+streamlit
+opencv-python-headless
+Pillow
+numpy
+
+from google.colab import files
+files.download("requirements.txt")
