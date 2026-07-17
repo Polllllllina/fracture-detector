@@ -26,7 +26,7 @@ st.markdown("""
         border-radius: 20px;
         text-align: center;
         margin-bottom: 2rem;
-        border: 1px solid rgba(180,160,220,0.2);
+        border: 2px solid rgba(180,160,220,0.3);
         box-shadow: 0 4px 24px rgba(180,160,220,0.05);
     }
     .main-header h1 {
@@ -50,10 +50,10 @@ st.markdown("""
         background: #141414;
         padding: 1.5rem;
         border-radius: 14px;
-        border: 1px solid rgba(180,160,220,0.25);
+        border: 2px solid rgba(180,160,220,0.35);
         margin: 0.5rem 0;
         text-align: center;
-        box-shadow: 0 2px 12px rgba(180,160,220,0.03);
+        box-shadow: 0 2px 12px rgba(180,160,220,0.05);
     }
     .stButton > button {
         background: #b4a0dc;
@@ -74,7 +74,7 @@ st.markdown("""
         background: #141414;
         padding: 1.5rem;
         border-radius: 14px;
-        border: 1px solid rgba(180,160,220,0.2);
+        border: 2px solid rgba(180,160,220,0.3);
         box-shadow: 0 2px 12px rgba(0,0,0,0.3);
         text-align: center;
     }
@@ -83,7 +83,7 @@ st.markdown("""
         padding: 2rem;
         color: #555566;
         margin-top: 3rem;
-        border-top: 1px solid rgba(180,160,220,0.1);
+        border-top: 2px solid rgba(180,160,220,0.15);
     }
     p, span, label, div {
         color: #cccccc !important;
@@ -93,23 +93,19 @@ st.markdown("""
     }
     .stSelectbox > div > div {
         background-color: #141414 !important;
-        border: 1px solid rgba(180,160,220,0.3) !important;
+        border: 2px solid rgba(180,160,220,0.4) !important;
         border-radius: 10px !important;
         color: #ffffff !important;
     }
     [data-testid="stFileUploader"] {
         background: #141414;
-        border: 2px dashed rgba(180,160,220,0.2);
+        border: 2px dashed rgba(180,160,220,0.3);
         border-radius: 14px;
         padding: 2rem;
     }
     [data-testid="stFileUploader"]:hover {
         border-color: #b4a0dc;
         background: #1a1a1a;
-    }
-    .stSuccess {
-        background-color: rgba(16,185,129,0.08) !important;
-        border: 1px solid rgba(16,185,129,0.2) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -227,7 +223,7 @@ if uploaded_file:
             if boxes is not None and len(boxes) > 0:
                 st.markdown(f"""
                 <div style="background: #0d1a14; padding: 1.2rem; border-radius: 12px; 
-                            margin: 1rem 0; border: 1px solid rgba(16,185,129,0.2);">
+                            margin: 1rem 0; border: 2px solid rgba(16,185,129,0.25);">
                     <h3 style="color: #10b981; margin: 0; font-size: 1.2rem;">Found {len(boxes)} Potential Fracture(s)</h3>
                 </div>
                 """, unsafe_allow_html=True)
@@ -248,7 +244,7 @@ if uploaded_file:
             else:
                 st.markdown("""
                 <div style="background: #141414; padding: 1.5rem; border-radius: 12px; 
-                            margin: 1rem 0; border: 1px solid rgba(180,160,220,0.15);">
+                            margin: 1rem 0; border: 2px solid rgba(180,160,220,0.2);">
                     <h3 style="color: #777788; margin: 0;">No Fractures Detected</h3>
                 </div>
                 """, unsafe_allow_html=True)
