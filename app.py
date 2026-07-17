@@ -14,61 +14,103 @@ st.set_page_config(
 
 st.markdown("""
 <style>
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #0a0a1a 0%, #12122a 50%, #0d0d24 100%);
+    }
+    [data-testid="stHeader"] {
+        background-color: rgba(0,0,0,0);
+    }
     .main-header {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-        padding: 2rem;
-        border-radius: 20px;
+        background: linear-gradient(135deg, #1a1a3e 0%, #1e1e4a 50%, #162052 100%);
+        padding: 2.5rem;
+        border-radius: 24px;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        border: 1px solid rgba(233,69,96,0.3);
+        box-shadow: 0 8px 32px rgba(233,69,96,0.1);
     }
     .main-header h1 {
         color: #e94560;
-        font-size: 2.8rem;
+        font-size: 3rem;
         margin: 0;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        font-weight: 800;
+        letter-spacing: -0.5px;
     }
     .main-header p {
-        color: #a0a0b0;
+        color: #8892b0;
         font-size: 1.2rem;
         margin-top: 0.5rem;
     }
     .metric-card {
-        background: linear-gradient(135deg, #16213e, #1a1a2e);
+        background: linear-gradient(135deg, #1a1a3e, #12123a);
         padding: 1.5rem;
-        border-radius: 15px;
-        border-left: 4px solid #e94560;
+        border-radius: 16px;
+        border: 1px solid rgba(233,69,96,0.2);
         margin: 1rem 0;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     .stButton > button {
         background: linear-gradient(135deg, #e94560, #c23152);
         color: white;
         border: none;
-        padding: 0.8rem 2rem;
+        padding: 1rem 2.5rem;
         font-size: 1.1rem;
-        border-radius: 10px;
+        border-radius: 12px;
         font-weight: 600;
         transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(233,69,96,0.3);
+        letter-spacing: 0.5px;
     }
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(233,69,96,0.5);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(233,69,96,0.5);
+        background: linear-gradient(135deg, #ff5a75, #e94560);
     }
     .result-card {
-        background: #16213e;
+        background: linear-gradient(135deg, #1a1a3e, #12123a);
         padding: 1.5rem;
-        border-radius: 15px;
-        border: 1px solid #0f3460;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        border-radius: 16px;
+        border: 1px solid rgba(100,255,218,0.1);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        text-align: center;
     }
     .footer {
         text-align: center;
         padding: 2rem;
-        color: #a0a0b0;
+        color: #8892b0;
         margin-top: 3rem;
-        border-top: 1px solid #0f3460;
+        border-top: 1px solid rgba(233,69,96,0.2);
+    }
+    p, span, label, div {
+        color: #ccd6f6 !important;
+    }
+    h1, h2, h3, h4 {
+        color: #e6f1ff !important;
+    }
+    .stSelectbox > div > div {
+        background-color: #1a1a3e !important;
+        border: 1px solid rgba(233,69,96,0.3) !important;
+        border-radius: 12px !important;
+        color: white !important;
+    }
+    [data-testid="stFileUploader"] {
+        background: linear-gradient(135deg, #1a1a3e, #12123a);
+        border: 2px dashed rgba(233,69,96,0.4);
+        border-radius: 16px;
+        padding: 2rem;
+    }
+    [data-testid="stFileUploader"]:hover {
+        border-color: #e94560;
+        background: linear-gradient(135deg, #1e1e4a, #1a1a3e);
+    }
+    .stSuccess {
+        background-color: rgba(0,200,83,0.1) !important;
+        border: 1px solid rgba(0,200,83,0.3) !important;
+    }
+    .stInfo {
+        background-color: rgba(100,255,218,0.1) !important;
+        border: 1px solid rgba(100,255,218,0.3) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -90,31 +132,24 @@ with col2:
 
 model_descriptions = {
     "Fast (YOLOv8n)": {"speed": "Fast", "accuracy": "Standard", "color": "#e94560"},
-    "Accurate (YOLOv8m)": {"speed": "Moderate", "accuracy": "High", "color": "#533483"}
+    "Accurate (YOLOv8m)": {"speed": "Moderate", "accuracy": "High", "color": "#64ffda"}
 }
 
 desc = model_descriptions[model_choice]
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 with col1:
     st.markdown(f"""
     <div class="metric-card">
-        <h3 style="color: {desc['color']};">Speed</h3>
-        <h2 style="color: white;">{desc['speed']}</h2>
+        <h3 style="color: {desc['color']}; margin: 0 0 0.5rem 0;">Speed</h3>
+        <h2 style="color: #e6f1ff; margin: 0;">{desc['speed']}</h2>
     </div>
     """, unsafe_allow_html=True)
 with col2:
     st.markdown(f"""
     <div class="metric-card">
-        <h3 style="color: {desc['color']};">Accuracy</h3>
-        <h2 style="color: white;">{desc['accuracy']}</h2>
-    </div>
-    """, unsafe_allow_html=True)
-with col3:
-    st.markdown(f"""
-    <div class="metric-card">
-        <h3 style="color: {desc['color']};">Model</h3>
-        <h2 style="color: white;">{model_choice.split()[0]}</h2>
+        <h3 style="color: {desc['color']}; margin: 0 0 0.5rem 0;">Accuracy</h3>
+        <h2 style="color: #e6f1ff; margin: 0;">{desc['accuracy']}</h2>
     </div>
     """, unsafe_allow_html=True)
 
@@ -133,9 +168,9 @@ def load_model(model_name):
 model = load_model(model_choice)
 
 CLASS_COLORS = [
-    (233, 69, 96), (0, 212, 255), (83, 52, 131),
-    (255, 193, 7), (0, 200, 83), (255, 61, 0),
-    (156, 39, 176)
+    (233, 69, 96), (100, 255, 218), (255, 193, 7),
+    (0, 200, 83), (100, 149, 237), (255, 105, 180),
+    (191, 64, 191)
 ]
 
 def draw_boxes(image, results):
@@ -191,10 +226,11 @@ if uploaded_file:
             boxes = results[0].boxes
             if boxes is not None and len(boxes) > 0:
                 st.markdown(f"""
-                <div style="background: linear-gradient(135deg, #1b4332, #2d6a4f); 
-                            padding: 1.5rem; border-radius: 15px; margin: 1rem 0;
-                            box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
-                    <h3 style="color: #95d5b2; margin: 0;">Found {len(boxes)} Potential Fracture(s)</h3>
+                <div style="background: linear-gradient(135deg, #0a2e1a, #0d3d24); 
+                            padding: 1.5rem; border-radius: 16px; margin: 1rem 0;
+                            border: 1px solid rgba(0,200,83,0.3);
+                            box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                    <h3 style="color: #64ffda; margin: 0;">Found {len(boxes)} Potential Fracture(s)</h3>
                 </div>
                 """, unsafe_allow_html=True)
                 
@@ -209,16 +245,17 @@ if uploaded_file:
                         st.markdown(f"""
                         <div class="result-card" style="border-left: 4px solid {color_hex};">
                             <h4 style="color: {color_hex};">{results[0].names[cls_id]}</h4>
-                            <h2 style="color: white;">{conf:.1%}</h2>
-                            <p style="color: #a0a0b0;">confidence</p>
+                            <h2 style="color: #e6f1ff;">{conf:.1%}</h2>
+                            <p style="color: #8892b0;">confidence</p>
                         </div>
                         """, unsafe_allow_html=True)
             else:
                 st.markdown("""
-                <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); 
-                            padding: 1.5rem; border-radius: 15px; margin: 1rem 0;
-                            box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
-                    <h3 style="color: #a0a0b0; margin: 0;">No Fractures Detected</h3>
+                <div style="background: linear-gradient(135deg, #1a1a3e, #12123a); 
+                            padding: 1.5rem; border-radius: 16px; margin: 1rem 0;
+                            border: 1px solid rgba(100,255,218,0.1);
+                            box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                    <h3 style="color: #8892b0; margin: 0;">No Fractures Detected</h3>
                 </div>
                 """, unsafe_allow_html=True)
 
