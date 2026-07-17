@@ -56,18 +56,6 @@ st.markdown("""
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(233,69,96,0.5);
     }
-    .upload-box {
-        border: 2px dashed #0f3460;
-        border-radius: 15px;
-        padding: 2rem;
-        text-align: center;
-        background: rgba(15,52,96,0.1);
-        transition: all 0.3s ease;
-    }
-    .upload-box:hover {
-        border-color: #e94560;
-        background: rgba(233,69,96,0.05);
-    }
     .result-card {
         background: #16213e;
         padding: 1.5rem;
@@ -96,14 +84,13 @@ col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     model_choice = st.selectbox(
         "Select Model",
-        ["Baseline (YOLOv8n)", "Fast (YOLOv8n tuned)", "Accurate (YOLOv8m tuned)"],
+        ["Fast (YOLOv8n)", "Accurate (YOLOv8m)"],
         label_visibility="collapsed"
     )
 
 model_descriptions = {
-    "Baseline (YOLOv8n)": {"speed": "Fast", "accuracy": "Basic", "color": "#0f3460"},
-    "Fast (YOLOv8n tuned)": {"speed": "Fast", "accuracy": "Enhanced", "color": "#e94560"},
-    "Accurate (YOLOv8m tuned)": {"speed": "Moderate", "accuracy": "High", "color": "#533483"}
+    "Fast (YOLOv8n)": {"speed": "Fast", "accuracy": "Standard", "color": "#e94560"},
+    "Accurate (YOLOv8m)": {"speed": "Moderate", "accuracy": "High", "color": "#533483"}
 }
 
 desc = model_descriptions[model_choice]
@@ -112,30 +99,28 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown(f"""
     <div class="metric-card">
-        <h3 style="color: {desc['color']};">⚡ Speed</h3>
+        <h3 style="color: {desc['color']};">Speed</h3>
         <h2 style="color: white;">{desc['speed']}</h2>
     </div>
     """, unsafe_allow_html=True)
 with col2:
     st.markdown(f"""
     <div class="metric-card">
-        <h3 style="color: {desc['color']};">🎯 Accuracy</h3>
+        <h3 style="color: {desc['color']};">Accuracy</h3>
         <h2 style="color: white;">{desc['accuracy']}</h2>
     </div>
     """, unsafe_allow_html=True)
 with col3:
     st.markdown(f"""
     <div class="metric-card">
-        <h3 style="color: {desc['color']};">🧠 Model</h3>
+        <h3 style="color: {desc['color']};">Model</h3>
         <h2 style="color: white;">{model_choice.split()[0]}</h2>
     </div>
     """, unsafe_allow_html=True)
 
 @st.cache_resource
 def load_model(model_name):
-    if model_name == "Baseline (YOLOv8n)":
-        return YOLO("best.pt")
-    elif model_name == "Fast (YOLOv8n tuned)":
+    if model_name == "Fast (YOLOv8n)":
         return YOLO("best_fast.pt")
     else:
         url = "https://drive.google.com/uc?id=1M59f3dXN6A8lBFok5IjHxTBS6y55KVyt"
@@ -191,16 +176,16 @@ if uploaded_file:
     image = Image.open(uploaded_file).convert("RGB")
 
     with col1:
-        st.markdown("### 📋 Original Image")
+        st.markdown("### Original Image")
         st.image(image, use_container_width=True)
 
-    if st.button("🔍 Analyze Image", type="primary", use_container_width=True):
-        with st.spinner("🔄 Processing image..."):
+    if st.button("Analyze Image", type="primary", use_container_width=True):
+        with st.spinner("Processing image..."):
             results = model(np.array(image))
             result_image = draw_boxes(image, results)
 
             with col2:
-                st.markdown("### ✅ Detection Results")
+                st.markdown("### Detection Results")
                 st.image(result_image, use_container_width=True)
 
             boxes = results[0].boxes
@@ -209,7 +194,7 @@ if uploaded_file:
                 <div style="background: linear-gradient(135deg, #1b4332, #2d6a4f); 
                             padding: 1.5rem; border-radius: 15px; margin: 1rem 0;
                             box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
-                    <h3 style="color: #95d5b2; margin: 0;">🔍 Found {len(boxes)} Potential Fracture(s)</h3>
+                    <h3 style="color: #95d5b2; margin: 0;">Found {len(boxes)} Potential Fracture(s)</h3>
                 </div>
                 """, unsafe_allow_html=True)
                 
@@ -233,7 +218,7 @@ if uploaded_file:
                 <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); 
                             padding: 1.5rem; border-radius: 15px; margin: 1rem 0;
                             box-shadow: 0 4px 16px rgba(0,0,0,0.2);">
-                    <h3 style="color: #a0a0b0; margin: 0;">✅ No Fractures Detected</h3>
+                    <h3 style="color: #a0a0b0; margin: 0;">No Fractures Detected</h3>
                 </div>
                 """, unsafe_allow_html=True)
 
