@@ -15,102 +15,92 @@ st.set_page_config(
 st.markdown("""
 <style>
     [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #0a0a1a 0%, #12122a 50%, #0d0d24 100%);
+        background: linear-gradient(135deg, #1a1d23 0%, #232834 50%, #1e2129 100%);
     }
     [data-testid="stHeader"] {
         background-color: rgba(0,0,0,0);
     }
     .main-header {
-        background: linear-gradient(135deg, #1a1a3e 0%, #1e1e4a 50%, #162052 100%);
-        padding: 2.5rem;
-        border-radius: 24px;
+        background: linear-gradient(135deg, #2d3340, #363d4a);
+        padding: 2rem;
+        border-radius: 20px;
         text-align: center;
         margin-bottom: 2rem;
-        border: 1px solid rgba(233,69,96,0.3);
-        box-shadow: 0 8px 32px rgba(233,69,96,0.1);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.2);
     }
     .main-header h1 {
-        color: #e94560;
-        font-size: 3rem;
+        color: #ffffff;
+        font-size: 2.8rem;
         margin: 0;
-        font-weight: 800;
-        letter-spacing: -0.5px;
+        font-weight: 700;
     }
     .main-header p {
-        color: #8892b0;
-        font-size: 1.2rem;
+        color: #a8b2c1;
+        font-size: 1.15rem;
         margin-top: 0.5rem;
     }
     .metric-card {
-        background: linear-gradient(135deg, #1a1a3e, #12123a);
+        background: #2d3340;
         padding: 1.5rem;
-        border-radius: 16px;
-        border: 1px solid rgba(233,69,96,0.2);
-        margin: 1rem 0;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.06);
+        margin: 0.5rem 0;
         text-align: center;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     }
     .stButton > button {
-        background: linear-gradient(135deg, #e94560, #c23152);
+        background: linear-gradient(135deg, #4f8cff, #3d6fd9);
         color: white;
         border: none;
-        padding: 1rem 2.5rem;
-        font-size: 1.1rem;
-        border-radius: 12px;
+        padding: 0.9rem 2.2rem;
+        font-size: 1.05rem;
+        border-radius: 10px;
         font-weight: 600;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(233,69,96,0.3);
-        letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(79,140,255,0.25);
     }
     .stButton > button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(233,69,96,0.5);
-        background: linear-gradient(135deg, #ff5a75, #e94560);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(79,140,255,0.4);
+        background: linear-gradient(135deg, #5d99ff, #4f8cff);
     }
     .result-card {
-        background: linear-gradient(135deg, #1a1a3e, #12123a);
+        background: #2d3340;
         padding: 1.5rem;
-        border-radius: 16px;
-        border: 1px solid rgba(100,255,218,0.1);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.06);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.15);
         text-align: center;
     }
     .footer {
         text-align: center;
         padding: 2rem;
-        color: #8892b0;
+        color: #6b7385;
         margin-top: 3rem;
-        border-top: 1px solid rgba(233,69,96,0.2);
+        border-top: 1px solid rgba(255,255,255,0.06);
     }
     p, span, label, div {
-        color: #ccd6f6 !important;
+        color: #d1d7e2 !important;
     }
     h1, h2, h3, h4 {
-        color: #e6f1ff !important;
+        color: #ffffff !important;
     }
     .stSelectbox > div > div {
-        background-color: #1a1a3e !important;
-        border: 1px solid rgba(233,69,96,0.3) !important;
-        border-radius: 12px !important;
-        color: white !important;
+        background-color: #2d3340 !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        border-radius: 10px !important;
+        color: #ffffff !important;
     }
     [data-testid="stFileUploader"] {
-        background: linear-gradient(135deg, #1a1a3e, #12123a);
-        border: 2px dashed rgba(233,69,96,0.4);
-        border-radius: 16px;
+        background: #2d3340;
+        border: 2px dashed rgba(255,255,255,0.12);
+        border-radius: 14px;
         padding: 2rem;
     }
     [data-testid="stFileUploader"]:hover {
-        border-color: #e94560;
-        background: linear-gradient(135deg, #1e1e4a, #1a1a3e);
-    }
-    .stSuccess {
-        background-color: rgba(0,200,83,0.1) !important;
-        border: 1px solid rgba(0,200,83,0.3) !important;
-    }
-    .stInfo {
-        background-color: rgba(100,255,218,0.1) !important;
-        border: 1px solid rgba(100,255,218,0.3) !important;
+        border-color: #4f8cff;
+        background: #333a49;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -131,8 +121,8 @@ with col2:
     )
 
 model_descriptions = {
-    "Fast (YOLOv8n)": {"speed": "Fast", "accuracy": "Standard", "color": "#e94560"},
-    "Accurate (YOLOv8m)": {"speed": "Moderate", "accuracy": "High", "color": "#64ffda"}
+    "Fast (YOLOv8n)": {"speed": "Fast", "accuracy": "Standard", "color": "#4f8cff"},
+    "Accurate (YOLOv8m)": {"speed": "Moderate", "accuracy": "High", "color": "#10b981"}
 }
 
 desc = model_descriptions[model_choice]
@@ -141,15 +131,15 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown(f"""
     <div class="metric-card">
-        <h3 style="color: {desc['color']}; margin: 0 0 0.5rem 0;">Speed</h3>
-        <h2 style="color: #e6f1ff; margin: 0;">{desc['speed']}</h2>
+        <h3 style="color: {desc['color']}; margin: 0 0 0.5rem 0; font-size: 1rem;">SPEED</h3>
+        <h2 style="color: #ffffff; margin: 0; font-size: 1.8rem;">{desc['speed']}</h2>
     </div>
     """, unsafe_allow_html=True)
 with col2:
     st.markdown(f"""
     <div class="metric-card">
-        <h3 style="color: {desc['color']}; margin: 0 0 0.5rem 0;">Accuracy</h3>
-        <h2 style="color: #e6f1ff; margin: 0;">{desc['accuracy']}</h2>
+        <h3 style="color: {desc['color']}; margin: 0 0 0.5rem 0; font-size: 1rem;">ACCURACY</h3>
+        <h2 style="color: #ffffff; margin: 0; font-size: 1.8rem;">{desc['accuracy']}</h2>
     </div>
     """, unsafe_allow_html=True)
 
@@ -168,16 +158,16 @@ def load_model(model_name):
 model = load_model(model_choice)
 
 CLASS_COLORS = [
-    (233, 69, 96), (100, 255, 218), (255, 193, 7),
-    (0, 200, 83), (100, 149, 237), (255, 105, 180),
-    (191, 64, 191)
+    "#4f8cff", "#10b981", "#f59e0b",
+    "#ef4444", "#8b5cf6", "#ec4899",
+    "#06b6d4"
 ]
 
 def draw_boxes(image, results):
     image = image.copy()
     draw = ImageDraw.Draw(image)
     try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 20)
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 18)
     except:
         font = ImageFont.load_default()
     
@@ -194,9 +184,9 @@ def draw_boxes(image, results):
                 draw.rectangle([(x1, y1), (x2, y2)], outline=color, width=4)
                 
                 text = f"{label} {conf:.2f}"
-                bbox = draw.textbbox((x1, y1 - 25), text, font=font)
+                bbox = draw.textbbox((x1, y1 - 22), text, font=font)
                 draw.rectangle(bbox, fill=color)
-                draw.text((x1 + 2, y1 - 25), text, fill="white", font=font)
+                draw.text((x1 + 3, y1 - 22), text, fill="white", font=font)
     
     return image
 
@@ -226,11 +216,9 @@ if uploaded_file:
             boxes = results[0].boxes
             if boxes is not None and len(boxes) > 0:
                 st.markdown(f"""
-                <div style="background: linear-gradient(135deg, #0a2e1a, #0d3d24); 
-                            padding: 1.5rem; border-radius: 16px; margin: 1rem 0;
-                            border: 1px solid rgba(0,200,83,0.3);
-                            box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-                    <h3 style="color: #64ffda; margin: 0;">Found {len(boxes)} Potential Fracture(s)</h3>
+                <div style="background: #1e3a2f; padding: 1.2rem; border-radius: 12px; 
+                            margin: 1rem 0; border: 1px solid rgba(16,185,129,0.3);">
+                    <h3 style="color: #10b981; margin: 0; font-size: 1.2rem;">Found {len(boxes)} Potential Fracture(s)</h3>
                 </div>
                 """, unsafe_allow_html=True)
                 
@@ -239,29 +227,25 @@ if uploaded_file:
                     cls_id = int(box.cls[0].item())
                     conf = box.conf[0].item()
                     color = CLASS_COLORS[cls_id % len(CLASS_COLORS)]
-                    color_hex = '#%02x%02x%02x' % color
                     
                     with cols[i]:
                         st.markdown(f"""
-                        <div class="result-card" style="border-left: 4px solid {color_hex};">
-                            <h4 style="color: {color_hex};">{results[0].names[cls_id]}</h4>
-                            <h2 style="color: #e6f1ff;">{conf:.1%}</h2>
-                            <p style="color: #8892b0;">confidence</p>
+                        <div class="result-card" style="border-top: 3px solid {color};">
+                            <p style="color: {color}; font-weight: 600; margin: 0 0 0.5rem 0;">{results[0].names[cls_id]}</p>
+                            <h2 style="color: #ffffff; margin: 0; font-size: 1.8rem;">{conf:.1%}</h2>
                         </div>
                         """, unsafe_allow_html=True)
             else:
                 st.markdown("""
-                <div style="background: linear-gradient(135deg, #1a1a3e, #12123a); 
-                            padding: 1.5rem; border-radius: 16px; margin: 1rem 0;
-                            border: 1px solid rgba(100,255,218,0.1);
-                            box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-                    <h3 style="color: #8892b0; margin: 0;">No Fractures Detected</h3>
+                <div style="background: #2d3340; padding: 1.5rem; border-radius: 12px; 
+                            margin: 1rem 0; border: 1px solid rgba(255,255,255,0.06);">
+                    <h3 style="color: #a8b2c1; margin: 0;">No Fractures Detected</h3>
                 </div>
                 """, unsafe_allow_html=True)
 
 st.markdown("""
 <div class="footer">
     <p>Bone Fracture Detection System | Powered by YOLOv8</p>
-    <p style="font-size: 0.9rem;">For research and educational purposes only</p>
+    <p style="font-size: 0.85rem;">For research and educational purposes only</p>
 </div>
 """, unsafe_allow_html=True)
