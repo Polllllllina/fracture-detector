@@ -4,57 +4,53 @@ from PIL import Image
 import numpy as np
 import cv2
 import os
+import gdown
 
-st.set_page_config(page_title="Детекция переломов", layout="wide")
-st.title("🦴 Детекция переломов на рентгеновских снимках")
+st.set_page_config(page_title="Bone Fracture Detection", layout="wide")
+st.title("Bone Fracture Detection on X-ray Images")
 
-# Выбор модели
 model_choice = st.radio(
-    "Выберите модель:",
-    ["⚡ Быстрая (YOLOv8n)", "🎯 Точная (YOLOv8x)"],
+    "Select model:",
+    ["Baseline (YOLOv8n)", "Fast (YOLOv8n tuned)", "Accurate (YOLOv8m tuned)"],
     horizontal=True
 )
 
-# Загружаем модель из текущей папки
 @st.cache_resource
-def load_model(path):
-    return YOLO(path)
+def load_model(model_name):
+    if model_name == "Baseline (YOLOv8n)":
+        return YOLO("best.pt")
+    elif model_name == "Fast (YOLOv8n tuned)":
+        return YOLO("best_fast.pt")
+    else:
+        url = "https://drive.google.com/uc?id=1M59f3dXN6A8lBFok5IjHxTBS6y55KVyt"
+        output = "best_accurate.pt"
+        if not os.path.exists(output):
+            gdown.download(url, output, quiet=False)
+        return YOLO(output)
 
-# Путь к файлу модели в той же папке, что и app.py
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "best.pt")
+model = load_model(model_choice)
 
-if "Быстрая" in model_choice:
-    model = load_model(MODEL_PATH)
-    st.info("⚡ Быстрая модель — результат за секунды")
-else:
-    model = load_model(MODEL_PATH)
-    st.warning("🎯 Точная модель — скоро заменим на настоящую")
-
-# Загрузка изображения
-uploaded_file = st.file_uploader("Загрузите рентгеновский снимок", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Upload an X-ray image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
     col1, col2 = st.columns(2)
     image = Image.open(uploaded_file).convert("RGB")
-    
+
     with col1:
-        st.image(image, caption="Оригинал", use_container_width=True)
-    
-    if st.button("🔍 Найти переломы", type="primary"):
-        with st.spinner("Анализирую снимок..."):
+        st.image(image, caption="Original", use_container_width=True)
+
+    if st.button("Detect Fractures", type="primary"):
+        with st.spinner("Analyzing..."):
             results = model(np.array(image))
-            
             for r in results:
                 plotted = r.plot()
                 plotted_rgb = cv2.cvtColor(plotted, cv2.COLOR_BGR2RGB)
-            
+
             with col2:
-                st.image(plotted_rgb, caption="Результат", use_container_width=True)
-            
+                st.image(plotted_rgb, caption="Result", use_container_width=True)
+
             boxes = results[0].boxes
             if len(boxes) > 0:
-                st.success(f"✅ Найдено подозрительных областей: {len(boxes)}")
+                st.success(f"Found {len(boxes)} suspicious area(s)")
             else:
-                st.info("ℹ️ Переломов не обнаружено")
-
-st.caption("MVP версия | Данные: Bone Fracture Detection (Roboflow)")
+                st.info("No fractures detected")
