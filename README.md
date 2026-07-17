@@ -53,7 +53,6 @@ The system supports 7 fracture classes:
 
 ---
 
-##  Repository Structure
 
 ## Repository Structure
 
