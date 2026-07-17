@@ -38,7 +38,7 @@ The system supports 7 fracture classes:
 | 5 | GitHub repository | 1 | ✅ |
 | 6 | Video presentation | 2 | ✅ |
 | 7 | Streamlit Cloud deployment | 4 | ✅ |
-| **Total** | | **16** | |
+| **Total** | | **17** | |
 
 ---
 
