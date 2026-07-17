@@ -1,10 +1,3 @@
-import streamlit as st
-from ultralytics import YOLO
-from PIL import Image, ImageDraw, ImageFont
-import numpy as np
-import os
-import gdown
-
 st.set_page_config(
     page_title="Bone Fracture Detection",
     page_icon="🦴",
@@ -26,8 +19,8 @@ st.markdown("""
         border-radius: 20px;
         text-align: center;
         margin-bottom: 2rem;
-        border: 2px solid rgba(180,160,220,0.3);
-        box-shadow: 0 4px 24px rgba(180,160,220,0.05);
+        border: 3px solid rgba(204,136,227,0.4);
+        box-shadow: 0 4px 24px rgba(204,136,227,0.08);
     }
     .main-header h1 {
         color: #ffffff;
@@ -41,7 +34,7 @@ st.markdown("""
         margin-top: 0.5rem;
     }
     .model-hint {
-        color: #b4a0dc;
+        color: #cc88e3;
         text-align: center;
         font-size: 0.95rem;
         margin-bottom: 0.5rem;
@@ -50,13 +43,13 @@ st.markdown("""
         background: #141414;
         padding: 1.5rem;
         border-radius: 14px;
-        border: 2px solid rgba(180,160,220,0.35);
+        border: 3px solid rgba(204,136,227,0.4);
         margin: 0.5rem 0;
         text-align: center;
-        box-shadow: 0 2px 12px rgba(180,160,220,0.05);
+        box-shadow: 0 2px 12px rgba(204,136,227,0.08);
     }
     .stButton > button {
-        background: #b4a0dc;
+        background: #cc88e3;
         color: #0a0a0a;
         border: none;
         padding: 0.9rem 2.2rem;
@@ -66,15 +59,15 @@ st.markdown("""
         transition: all 0.3s ease;
     }
     .stButton > button:hover {
-        background: #c5b5e8;
+        background: #d9a3ed;
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(180,160,220,0.3);
+        box-shadow: 0 6px 20px rgba(204,136,227,0.35);
     }
     .result-card {
         background: #141414;
         padding: 1.5rem;
         border-radius: 14px;
-        border: 2px solid rgba(180,160,220,0.3);
+        border: 3px solid rgba(204,136,227,0.35);
         box-shadow: 0 2px 12px rgba(0,0,0,0.3);
         text-align: center;
     }
@@ -83,7 +76,7 @@ st.markdown("""
         padding: 2rem;
         color: #555566;
         margin-top: 3rem;
-        border-top: 2px solid rgba(180,160,220,0.15);
+        border-top: 3px solid rgba(204,136,227,0.2);
     }
     p, span, label, div {
         color: #cccccc !important;
@@ -93,18 +86,18 @@ st.markdown("""
     }
     .stSelectbox > div > div {
         background-color: #141414 !important;
-        border: 2px solid rgba(180,160,220,0.4) !important;
+        border: 3px solid rgba(204,136,227,0.45) !important;
         border-radius: 10px !important;
         color: #ffffff !important;
     }
     [data-testid="stFileUploader"] {
         background: #141414;
-        border: 2px dashed rgba(180,160,220,0.3);
+        border: 3px dashed rgba(204,136,227,0.35);
         border-radius: 14px;
         padding: 2rem;
     }
     [data-testid="stFileUploader"]:hover {
-        border-color: #b4a0dc;
+        border-color: #cc88e3;
         background: #1a1a1a;
     }
 </style>
@@ -127,7 +120,7 @@ with col2:
     )
 
 model_descriptions = {
-    "Fast (YOLOv8n)": {"speed": "Fast", "accuracy": "Standard", "color": "#b4a0dc"},
+    "Fast (YOLOv8n)": {"speed": "Fast", "accuracy": "Standard", "color": "#cc88e3"},
     "Accurate (YOLOv8m)": {"speed": "Moderate", "accuracy": "High", "color": "#10b981"}
 }
 
@@ -164,7 +157,7 @@ def load_model(model_name):
 model = load_model(model_choice)
 
 CLASS_COLORS = [
-    "#b4a0dc", "#10b981", "#f59e0b",
+    "#cc88e3", "#10b981", "#f59e0b",
     "#ef4444", "#60a5fa", "#ec4899",
     "#06b6d4"
 ]
@@ -223,7 +216,7 @@ if uploaded_file:
             if boxes is not None and len(boxes) > 0:
                 st.markdown(f"""
                 <div style="background: #0d1a14; padding: 1.2rem; border-radius: 12px; 
-                            margin: 1rem 0; border: 2px solid rgba(16,185,129,0.25);">
+                            margin: 1rem 0; border: 3px solid rgba(16,185,129,0.3);">
                     <h3 style="color: #10b981; margin: 0; font-size: 1.2rem;">Found {len(boxes)} Potential Fracture(s)</h3>
                 </div>
                 """, unsafe_allow_html=True)
@@ -244,7 +237,7 @@ if uploaded_file:
             else:
                 st.markdown("""
                 <div style="background: #141414; padding: 1.5rem; border-radius: 12px; 
-                            margin: 1rem 0; border: 2px solid rgba(180,160,220,0.2);">
+                            margin: 1rem 0; border: 3px solid rgba(204,136,227,0.25);">
                     <h3 style="color: #777788; margin: 0;">No Fractures Detected</h3>
                 </div>
                 """, unsafe_allow_html=True)
