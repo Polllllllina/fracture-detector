@@ -54,6 +54,7 @@ The system supports 7 fracture classes:
 ---
 
 ##  Repository Structure
+
 fracture-detector/
 ├── app.py # Streamlit web application
 ├── train.py # Model training script
