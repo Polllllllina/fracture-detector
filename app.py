@@ -57,7 +57,7 @@ st.markdown("""
     }
     .stButton > button {
         background: #cc88e3;
-        color: #0a0a0a;
+        color: #000000;
         border: none;
         padding: 0.9rem 2.2rem;
         font-size: 1.05rem;
@@ -97,18 +97,18 @@ st.markdown("""
         border-radius: 10px !important;
     }
     .stSelectbox [data-baseweb="select"] [aria-selected="true"] {
-        color: #cc88e3 !important;
-        font-size: 1.15rem !important;
+        color: #ffffff !important;
+        font-size: 1.2rem !important;
         font-weight: 600 !important;
     }
     .stSelectbox [data-baseweb="select"] div {
-        color: #cc88e3 !important;
-        font-size: 1.15rem !important;
+        color: #ffffff !important;
+        font-size: 1.2rem !important;
         font-weight: 500 !important;
     }
     .stSelectbox div[role="option"] div {
-        color: #cc88e3 !important;
-        font-size: 1.1rem !important;
+        color: #ffffff !important;
+        font-size: 1.15rem !important;
         background-color: #141414 !important;
     }
     [data-testid="stFileUploader"] {
@@ -206,7 +206,7 @@ def draw_boxes(image, results):
                 text = f"{label} {conf:.2f}"
                 bbox = draw.textbbox((x1, y1 - 22), text, font=font)
                 draw.rectangle(bbox, fill=color)
-                draw.text((x1 + 3, y1 - 22), text, fill="#0a0a0a", font=font)
+                draw.text((x1 + 3, y1 - 22), text, fill="#000000", font=font)
     
     return image
 
