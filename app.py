@@ -1,4 +1,3 @@
-
 import streamlit as st
 from ultralytics import YOLO
 from PIL import Image, ImageDraw, ImageFont
@@ -44,7 +43,7 @@ st.markdown("""
     .model-hint {
         color: #cc88e3;
         text-align: center;
-        font-size: 0.95rem;
+        font-size: 1rem;
         margin-bottom: 0.5rem;
     }
     .metric-card {
@@ -96,7 +95,21 @@ st.markdown("""
         background-color: #141414 !important;
         border: 3px solid rgba(204,136,227,0.45) !important;
         border-radius: 10px !important;
-        color: #ffffff !important;
+    }
+    .stSelectbox [data-baseweb="select"] [aria-selected="true"] {
+        color: #cc88e3 !important;
+        font-size: 1.15rem !important;
+        font-weight: 600 !important;
+    }
+    .stSelectbox [data-baseweb="select"] div {
+        color: #cc88e3 !important;
+        font-size: 1.15rem !important;
+        font-weight: 500 !important;
+    }
+    .stSelectbox div[role="option"] div {
+        color: #cc88e3 !important;
+        font-size: 1.1rem !important;
+        background-color: #141414 !important;
     }
     [data-testid="stFileUploader"] {
         background: #141414;
