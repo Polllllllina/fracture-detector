@@ -46,8 +46,8 @@ The system supports 7 fracture classes:
 
 | Model | Architecture | mAP@0.5 | Speed | Description |
 |-------|-------------|---------|-------|-------------|
-| Fast | YOLOv8n | 0.XXX | ~5ms | Lightweight, suitable for CPU |
-| Accurate | YOLOv8m | 0.XXX | ~15ms | Higher accuracy, GPU recommended |
+| Fast | YOLOv8n | 0.272 | ~5ms | Lightweight, suitable for CPU |
+| Accurate | YOLOv8m | 0.291 | ~15ms | Higher accuracy, GPU recommended |
 
 *Metrics obtained on the Bone Fracture Detection dataset.*
 
@@ -55,14 +55,18 @@ The system supports 7 fracture classes:
 
 ##  Repository Structure
 
+## Repository Structure
+
+```
 fracture-detector/
-├── app.py # Streamlit web application
-├── train.py # Model training script
-├── best_fast.pt # Fast model weights
-├── best_accurate.pt # Accurate model weights (Google Drive)
-├── requirements.txt # Python dependencies
-├── packages.txt # System dependencies
-└── README.md # Project documentation
+├── app.py              # Streamlit web application
+├── train.py            # Model training script
+├── best_fast.pt        # Fast model weights
+├── best_accurate.pt    # Accurate model weights
+├── requirements.txt    # Python dependencies
+├── packages.txt        # System dependencies
+└── README.md           # Project documentation
+```
 ---
 
 ## Installation
